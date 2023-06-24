@@ -1,8 +1,21 @@
 /** @format */
 
-import React from "react";
-
+import React,{useState} from "react";
+ 
 const MainPage = () => {
+
+//states for felds
+const [date,setDate]=useState(null);
+const [sourceCurrency,setsourceCurrency]=useState("");
+const [targetCurrency,setTargetCurrency]=useState("");
+const [amountInSourceCurrency ,setAmountInSourceCurrency]=useState(0);
+const [amountInTargetCurrency,setAmountInTargetCurrency]=useState(0);
+
+const handelSubmit = (e) =>{
+  e.preventDefault();
+  console.log(date,sourceCurrency,targetCurrency,amountInSourceCurrency,amountInTargetCurrency)
+}
+
   return (
     <div>
       <h1 className="lg:mx-32  text-5xl font-black flex items-center justify-normal text-green-500">Convert your currencies Today</h1>
@@ -15,35 +28,38 @@ const MainPage = () => {
       </p>
       <div className="mt-5 flex items-center justify-center flex-col">
         <section className=" w- lg:w-1/2">
-          <form>
+          <form onSubmit={handelSubmit}>
             <div className="mb-4">
             <label
                 className="block mb-2 text-sm font-medium text-white dark:text-white"
-                htmlFor="date"
+                htmlFor={date}
               >
                 Date
               </label>
               <input
+              onChange={(e) => setDate(e.target.value)}
                 required
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500"
                 type="date"
-                name="date"
-                id="date"
+                name={date}
+                id={date}
                 placeholder="date.."
               />
             </div>
             <div className="mb-4">
               <label
                 className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                htmlFor="sourceCurrency"
+                htmlFor={sourceCurrency}
               >
                 Source Currency
               </label>
 
               <select
+              onChange={(e) => setsourceCurrency(e.target.value)}
                 className=" bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500"
-                name="sourceCurrency"
-                id="sourceCurrency"
+                name={sourceCurrency}
+                id={sourceCurrency}
+                value={sourceCurrency}
               >
                 <option value="">Select source currency</option>{" "}
                
@@ -53,14 +69,16 @@ const MainPage = () => {
             <div className="mb-4">
               <label
                 className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                htmlFor="targetCurrency"
+                htmlFor={targetCurrency}
               >
                 Target Currency
               </label>
               <select
+              onChange={(e) => setTargetCurrency(e.target.value)}
                 className=" bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500"
-                name="sourceCurrency"
-                id="sourceCurrency"
+                name={targetCurrency}
+                id={targetCurrency}
+                value={targetCurrency}
               >
                 <option value="">Select target currency</option>{" "}
                   
@@ -75,16 +93,17 @@ const MainPage = () => {
                 Amount in source currency
               </label>
               <input
+              onChange={(e) => setAmountInSourceCurrency(e.target.value)}
                 required
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500"
                 type="number"
-                name="amountInSourceCurrency"
-                id="amountInSourceCurrency"
+                name={amountInSourceCurrency}
+                id={amountInSourceCurrency}
                 placeholder="Amount in source currency..."
               />
             </div>
 
-            <button className="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
+            <button  className="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
               Get the target Currency
             </button>
           </form>
