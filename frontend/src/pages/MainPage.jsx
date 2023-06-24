@@ -1,6 +1,8 @@
 /** @format */
 
-import React,{useState} from "react";
+import React,{useEffect, useState} from "react";
+import axios from "axios";
+
  
 const MainPage = () => {
 
@@ -10,6 +12,27 @@ const [sourceCurrency,setsourceCurrency]=useState("");
 const [targetCurrency,setTargetCurrency]=useState("");
 const [amountInSourceCurrency ,setAmountInSourceCurrency]=useState(0);
 const [amountInTargetCurrency,setAmountInTargetCurrency]=useState(0);
+const [currencyNames, setCurrencyNames]=useState([])
+
+
+useEffect( () => {
+  const getCurrencyNames = async() =>{
+    try {
+      const responce = await axios.get(
+        "http://localhost:5000/getAllCurrencies"
+      );
+setCurrencyNames(responce.data);
+    } catch (error) {
+      console.log(error)
+    }
+  }
+  getCurrencyNames();
+}, [])
+
+
+
+
+
 
 const handelSubmit = (e) =>{
   e.preventDefault();
